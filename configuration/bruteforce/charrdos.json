@@ -1,7 +1,8 @@
 {
+    "packet_parse": {
+        "target_file_path": "/home/ubuntu/pcap_files/20240124.pcapng"
+    },
     "dataset_construct": {
-        "data_path": "../data/charrdos.data",
-        "label_path": "../data/charrdos.label",
         "train_ratio": 0.0
     },
     "flow_construct": {
