@@ -1,17 +1,30 @@
 #include <gflags/gflags.h>
+#include <cstdlib>
 
 #include "common.hpp"
 #include "./graph_analyze/detector_main.hpp"
 
 using namespace std;
 
-DEFINE_string(config, "../configuration/lrscan/charrdos.json", "Configuration file location.");
+DEFINE_string(config, "", "Configuration file location.");
 
 int main(int argc, char *argv[])
 {
     __START_FTIMMER__
 
     google::ParseCommandLineFlags(&argc, &argv, true);
+
+    // Get the config file path from the environment variable
+    const char *config_env = std::getenv("CONFIG_PATH");
+    if (config_env != nullptr)
+    {
+        FLAGS_config = string(config_env);
+    }
+
+    if (FLAGS_config.empty())
+    {
+        FATAL_ERROR("Configuration file location is not specified.");
+    }
 
     json config_j;
     try
